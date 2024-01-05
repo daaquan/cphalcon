@@ -299,7 +299,7 @@ abstract class AbstractDispatcher extends AbstractInjectionAware implements Disp
                 break;
             }
 
-            let handler = container->getShared(handlerClass);
+            let handler = container->getShared("Phalcon\Mvc\ControllerInterface");
 
             // Handlers must be only objects
             if unlikely typeof handler !== "object" {

@@ -19,7 +19,7 @@ on:
 
 env:
   # All versions should be declared here
-  PHALCON_VERSION: 5.6.1
+  PHALCON_VERSION: 5.7.0
   ZEPHIR_PARSER_VERSION: 1.6.0
 
   # For tests
@@ -92,7 +92,9 @@ jobs:
 
         name:
           - ubuntu-gcc
-          - macos-clang
+
+# Removing temporarily macos builds since it fails due to the container setup
+#          - macos-clang
 
         # matrix names should be in next format:
         #     {php}-{ts}-{os.name}-{compiler}-{arch}
@@ -113,7 +115,7 @@ jobs:
           #- { php: '8.2', ts: 'nts', arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup platform specific environment
         shell: pwsh
@@ -135,7 +137,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download Phalcon Pecl Package
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: phalcon-pecl
           path: ./phalcon-pecl
@@ -271,7 +273,7 @@ jobs:
         php: [ '8.0', '8.1', '8.2', '8.3' ]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -284,7 +286,7 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download Phalcon Pecl Package
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: phalcon-pecl
           path: ./phalcon-pecl
@@ -381,7 +383,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Get the release version
         id: get-version
@@ -392,7 +394,7 @@ jobs:
 
       - name: Download Phalcon build artifacts
         id: download
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: ./build-artifacts
 
